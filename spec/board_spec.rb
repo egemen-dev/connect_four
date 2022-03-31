@@ -7,8 +7,17 @@ describe Board do
     it 'creates the board' do
       expect(game_board.board).not_to be(nil)
     end
-
   end
+
+  describe '#win' do
+    subject (:game_board) { Board.new }
+    context 'if board is empty' do
+      it 'false - no wins' do
+        expect(game_board.win).to be(false)
+      end
+    end
+  end
+
 
   describe '#fill_in' do
     context 'when player drops the yellow coin on column 3' do
@@ -55,6 +64,6 @@ describe Board do
         expect(board.board[2][6]).to eq(0)
       end
     end
-  end    
+  end
 end
 

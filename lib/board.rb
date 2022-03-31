@@ -30,6 +30,10 @@ class Board
     puts "\n "
   end
 
+  def win
+    false
+  end
+
   private
 
   def slot_nums

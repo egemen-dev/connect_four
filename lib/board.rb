@@ -39,7 +39,20 @@ class Board
   end
 
   def lateral_win
-    false
+    condition = false
+    (0..5).each do |row|
+      (0...4).each do |col|
+        if board[row][col] != 0
+          if board[row][col] == board[row][col + 1] \
+            && board[row][col] == board[row][col + 2] \
+            && board[row][col] == board[row][col + 3]
+            puts "Player #{board[row][col]} won!"
+            condition = true
+          end
+        end
+      end
+    end
+    condition
   end
 
   def diagonal_win

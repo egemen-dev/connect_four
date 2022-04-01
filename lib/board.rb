@@ -19,11 +19,11 @@ class Board
   def display
     # Prints the column numbers.
     slot_nums
-    
+
     # Prints the whole board.
     (0...6).each do |row|
       (0...7).each do |col|
-        print " #{ board[row][col] } "
+        print " #{board[row][col]} "
       end
       puts ""
     end
@@ -31,7 +31,46 @@ class Board
   end
 
   def win
+    lateral_win || vertical_win || diagonal_win
+  end
+
+  def vertical_win
     false
+  end
+
+  def lateral_win
+    false
+  end
+
+  def diagonal_win
+    condition = false
+    # Going up and to the right.
+    (3..5).each do |row|
+      (0..3).each do |col|
+        if board[row][col] != 0
+          if board[row][col] == board[row - 1][col + 1] \
+            && board[row][col] == board[row - 2][col + 2] \
+            && board[row][col] == board[row - 3][col + 3]
+            puts "Player #{board[row][col]} won!"
+            condition = true
+          end
+        end
+      end
+    end
+    # Going down and to the right.
+    (0..3).each do |row|
+      (0...4).each do |col|
+        if board[row][col] != 0
+          if board[row][col] == board[row + 1][col + 1] \
+            && board[row][col] == board[row + 2][col + 2] \
+            && board[row][col] == board[row + 3][col + 3]
+            puts "Player #{board[row][col]} won!"
+            condition = true
+          end
+        end
+      end
+    end
+    condition
   end
 
   private
@@ -41,7 +80,7 @@ class Board
     slot_numbers = ""
     line = ""
     (0..6).each do |num|
-      slot_numbers << " #{num+1} "
+      slot_numbers << " #{num + 1} "
       line << "———"
     end
     puts line
@@ -50,13 +89,25 @@ class Board
   end
 end
 
-
-
-# x = Board.new
-# x.fill_in(5, x.blue)
-# x.display
-# x.fill_in(7, x.yellow)
-# x.fill_in(7, x.yellow)
-# x.fill_in(6, x.blue)
-
-# x.display
+x = Board.new
+x.fill_in(1, x.blue)
+x.fill_in(1, x.blue)
+x.fill_in(1, x.yellow)
+x.fill_in(1, x.blue)
+x.fill_in(1, x.blue)
+x.fill_in(1, x.yellow)
+x.fill_in(2, x.yellow)
+x.fill_in(2, x.yellow)
+x.fill_in(2, x.blue)
+x.fill_in(2, x.yellow)
+x.fill_in(2, x.yellow)
+x.fill_in(3, x.blue)
+x.fill_in(3, x.yellow)
+x.fill_in(3, x.blue)
+x.fill_in(3, x.yellow)
+x.fill_in(4, x.yellow)
+x.fill_in(4, x.yellow)
+x.fill_in(4, x.yellow)
+x.fill_in(4, x.blue)
+p x.diagonal_win
+x.display

@@ -120,8 +120,8 @@ describe Board do
         board.fill_in(4, board.yellow)
       end
 
-      xit 'ture - win' do
-        expect(board.win).to be(ture)
+      it 'ture - win' do
+        expect(board.win).to be(true)
       end
     end
 
